@@ -8,11 +8,13 @@
 </head>
 <body>
     <?php
-//khởi taoj một cookies
+//khởi taoj một session
+session_start();
 $flag = 0;
 if (!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['address'])) {
-    $thongtin = $_POST['name'] . '-' . $_POST['email'] . '-' . $_POST['address'];
-    setcookie('khachhang', $thongtin, time()+3600, '/', '', 0, 0);
+    $_SESSION["name"]=$_POST['name'];
+    $_SESSION['email']=$_POST['email'];
+    $_SESSION['address']=$_POST['address'];
     $flag = 1;
 }
 ?>
@@ -42,13 +44,14 @@ if ($flag == 1) {
         <table>
             <tr>
                 <td>information client<br>
-                <?php echo $_COOKIE['khachhang'];?>
+                <?php echo "tên khách hàng: ".$_SESSION['name'].'<br>';
+                echo "email khách hàng: ".$_SESSION['email'].'<br>';
+                echo 'address khach hang: '.$_SESSION['address'].'<BR>';?>
             </td>
+            <td><a href="doc_session.php">truy cập</a></td>
             </tr>
         </table>
         <?php
-}else{
-    echo "vu trong dong";
 }
 ?>
 
